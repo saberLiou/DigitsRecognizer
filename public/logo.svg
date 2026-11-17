@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Digits Recognizer">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e293b"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="nn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#c026d3"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="-1.5" dy="2.5" stdDeviation="2.2" flood-color="#0f172a" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+  <rect x="0.75" y="0.75" width="126.5" height="126.5" rx="27.25" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- 手寫畫布 -->
+  <rect x="16" y="16" width="78" height="78" rx="10" fill="#ffffff"/>
+  <path d="M35.5 18v74M55 18v74M74.5 18v74M18 35.5h74M18 55h74M18 74.5h74" stroke="#f1f5f9" stroke-width="1.5"/>
+  <path d="M33 37C43 34 61 33 75 36C67 51 59 65 52 80" fill="none" stroke="#0f172a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 類神經網路徽章 -->
+  <g filter="url(#shadow)">
+    <rect x="72" y="72" width="42" height="42" rx="11" fill="url(#nn)"/>
+    <path d="M82 86L93 82M82 86L93 93M82 86L93 104M82 100L93 82M82 100L93 93M82 100L93 104M93 82L104 93M93 93L104 93M93 104L104 93" stroke="#ffffff" stroke-opacity="0.45" stroke-width="1.2"/>
+    <g fill="#ffffff">
+      <circle cx="82" cy="86" r="2.6"/>
+      <circle cx="82" cy="100" r="2.6"/>
+      <circle cx="93" cy="82" r="2.6"/>
+      <circle cx="93" cy="93" r="2.6"/>
+      <circle cx="93" cy="104" r="2.6"/>
+      <circle cx="104" cy="93" r="3.6"/>
+    </g>
+  </g>
+</svg>
