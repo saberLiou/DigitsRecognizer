@@ -6,7 +6,9 @@
 
 <p align="center">
   A one-page web app that recognizes handwritten digits with an artificial neural network (ANN) running entirely in the browser.<br />
-  <a href="https://saberliou.github.io/DigitsRecognizer/">Live demo</a>
+  Live demo:
+  <a href="https://saberliou.github.io/DigitsRecognizer/">GitHub Pages</a> ·
+  <a href="https://saberliou.gitlab.io/DigitsRecognizer/">GitLab Pages</a>
 </p>
 
 ## Features
@@ -28,7 +30,7 @@ Requires [nvm](https://github.com/nvm-sh/nvm); the Node.js version is pinned in 
 nvm use          # Switch to the Node.js version in .nvmrc (run `nvm install` first if missing)
 npm install
 npm run dev      # Start the dev server
-npm run build    # Build to dist/ (relative paths, deployable to GitHub Pages or any static host)
+npm run build    # Build to dist/ (relative paths, deployable to GitHub Pages, GitLab Pages, or any static host)
 npm run preview  # Serve the built dist/ locally to check the production build
 npm run lint     # Lint with ESLint (`npm run lint:fix` to auto-fix)
 npm run format   # Format with Prettier (`npm run format:check` to check only)
@@ -48,8 +50,8 @@ src/
 └─ style.css            # Tailwind entry + result pop animation
 public/
 ├─ model/               # Pre-trained weights W1–W3, b1–b3 (JSON, fetched at runtime)
-├─ logo.svg
-└─ logo.ico
+├─ logo.svg             # Logo (README, favicon for modern browsers)
+└─ logo.ico             # Favicon fallback (16–256px)
 ```
 
 ### File dependencies
@@ -107,13 +109,19 @@ Arrows point from the importing file to the imported one.
 
 ## Deployment
 
-Every push to `master` is linted, built, and deployed to GitHub Pages by GitHub Actions (`.github/workflows/deploy.yml`):
+GitHub and GitLab run the same pipeline. Pull requests (GitHub) and merge requests (GitLab) only run the checks; pushes to the default branch (`master`) also deploy to Pages:
 
 ```text
- push master → npm ci → lint → format:check → vite build → GitHub Pages
+ PR / MR     → npm ci → lint → format:check → vite build
+ push master → npm ci → lint → format:check → vite build → Pages
 ```
 
-https://saberliou.github.io/DigitsRecognizer
+| Host         | Pipeline                                        | URL                                          |
+| ------------ | ----------------------------------------------- | -------------------------------------------- |
+| GitHub Pages | GitHub Actions (`.github/workflows/deploy.yml`) | https://saberliou.github.io/DigitsRecognizer |
+| GitLab Pages | GitLab CI/CD (`.gitlab-ci.yml`)                 | https://saberliou.gitlab.io/DigitsRecognizer |
+
+The build uses relative paths (`base: './'`), so the same output works under either URL. Push to each remote to trigger its pipeline (e.g. `git push github master` and `git push gitlab master`).
 
 ## License
 

@@ -9,7 +9,7 @@ export default defineConfig([
     files: ['**/*.{js,mjs}'],
   },
 
-  globalIgnores(['**/dist/**', 'public/model/**']),
+  globalIgnores(['**/dist/**', 'public/model/**', '.npm/**']),
 
   {
     languageOptions: {

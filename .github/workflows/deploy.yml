@@ -1,19 +1,15 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
+# PR 只做檢查（install、lint、format、build）；預設分支才部署
 on:
   push:
+    # 觸發條件不支援 expression，無法寫成 default branch；改預設分支時要一併修改
     branches: [master]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-# 同時只跑一個部署，新的推送會排隊但不會中斷進行中的部署
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
   build:
@@ -41,16 +37,26 @@ jobs:
         run: npm run build
 
       - name: Setup Pages
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         uses: actions/upload-pages-artifact@v4
         with:
           path: dist
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    # 同時只跑一個部署，新的推送會排隊但不會中斷進行中的部署
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
